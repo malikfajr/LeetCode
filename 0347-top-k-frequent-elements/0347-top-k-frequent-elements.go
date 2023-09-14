@@ -1,30 +1,28 @@
-func topKFrequent(nums[] int, k int)[] int {
-    var counts = make(map[int] int)
+type Pair struct {
+    num int
+	fr  int
+}
 
-    // cari angka unik beserta frekuensinya
-    for i := 0; i < len(nums); i++ {
-        counts[nums[i]] += 1;
-    }
+func topKFrequent(nums []int, k int) []int {
+	var freq = make(map[int]int)
 
-    var result = [] int {}
-    for k > 0 {
-        i := -1 // frekunsi pasti diatas 0
-        var v int
-        
-        // cari nilai tertinggi
-        for num, count := range counts {
-            if i < count {
-                i = count
-                v = num
-            }
+	for i := 0; i < len(nums); i++ {
+		freq[nums[i]] += 1
+	}
 
-        }
-        
-        // tampung dalam variabel,
-        // kemudian hapus untuk menghindari redundansi
-        result = append(result, v)
-        delete(counts, v)
-        k--;
-    }
-    return result
+	var counter = make([]Pair, len(freq))
+	for num, count := range freq {
+		counter = append(counter, Pair{num: num, fr: count})
+	}
+
+	sort.Slice(counter, func(i, j int) bool {
+		return counter[i].fr > counter[j].fr
+	})
+
+	var ans = make([]int, k)
+	for i := 0; i < k; i++ {
+		ans[i] = counter[i].num
+	}
+
+	return ans
 }
