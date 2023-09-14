@@ -1,25 +1,25 @@
 func isValid(s string) bool {
-    	var keys = map[byte]byte{
+    var keys = map[uint8]uint8{
 		'(': ')',
 		'[': ']',
 		'{': '}',
 	}
 
-	var stack = make([]byte, 0, len(s))
+	var stack = make([]uint8, 0)
 
 	for i := 0; i < len(s); i++ {
-
-		if _, valid := keys[s[i]]; valid {
-			stack = append(stack, keys[s[i]])
-			fmt.Println(stack, keys[s[i]])
+		char := s[i]
+		if val, valid := keys[char]; valid {
+			stack = append([]uint8{val}, stack...)
 		} else {
-			if len(stack) == 0 || stack[len(stack)-1] != s[i] {
+            if len(stack) == 0 || stack[0] != char {
 				return false
 			}
-			stack = stack[:len(stack)-1]
+			stack = stack[1:]
 
 		}
 
 	}
+    
 	return (len(stack) == 0)
 }
