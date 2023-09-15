@@ -11,5 +11,11 @@ func isAnagram(s string, t string) bool {
         mapT[t[i]]++
     }
     
-    return reflect.DeepEqual(mapS, mapT) 
+    for char, count := range mapS {
+        if value, valid := mapT[char]; !valid || count != value {
+            return false
+        }
+    }
+    
+    return true
 }
