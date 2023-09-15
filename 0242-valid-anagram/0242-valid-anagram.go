@@ -3,8 +3,8 @@ func isAnagram(s string, t string) bool {
         return false
     }
     
-    var mapS = make(map[byte]int)
-    var mapT = make(map[byte]int)
+    var mapS = make(map[byte]uint16)
+    var mapT = make(map[byte]uint16)
     
     for i := 0; i < len(s); i++ {
         mapS[s[i]]++
