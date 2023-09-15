@@ -7,6 +7,6 @@ func removeDuplicates(nums []int) int {
             nums[p] = nums[i]
         }
     }
-
-    return p + 1;
+    p++
+    return p;
 }
