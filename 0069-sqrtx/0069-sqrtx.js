@@ -4,9 +4,8 @@
  */
 var mySqrt = function(x) {
     if (x == 0) return 0;
-    if (x < 4) return 1;
     
-    let i = 2
+    let i = 1
     while (i*i <= x) {
         i++
     }
